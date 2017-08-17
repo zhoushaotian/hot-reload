@@ -5,6 +5,7 @@
 
 # folders
 node_modules/*
+server/static
 
 
 

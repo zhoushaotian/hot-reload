@@ -1,8 +1,8 @@
-'use strict';
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin');
 module.exports = {
     entry: {
         app: ['./dev-client', path.resolve(__dirname, 'build/main.js')]
@@ -13,8 +13,18 @@ module.exports = {
         publicPath: '/',
         chunkFilename: 'js/[name].bundle.js'
     },
+    devtool: '#cheap-module-eval-source-map',
     module: {
         rules: [
+            {
+                test: /\.(js|vue)$/,
+                loader: 'eslint-loader',
+                include: [path.join(__dirname, 'build')],
+                enforce: 'pre',
+                options: {
+                    formatter: require('eslint-friendly-formatter')
+                }
+            },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
@@ -69,6 +79,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('css/appstyle.css'),
         new webpack.HotModuleReplacementPlugin(),
+        new FriendlyErrorPlugin(),
         new htmlWebpackPlugin({
             titile: 'hotreloaddemo',
             filename: 'index.html',

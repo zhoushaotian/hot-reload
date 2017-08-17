@@ -1,3 +1,4 @@
 node_modules/
 .babelrc
-server/static/
+server/
+webpack.config.js

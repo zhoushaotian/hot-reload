@@ -1,11 +1,17 @@
 module.exports = {
     "env": {
         "es6": true,
-        "node": true
+        "browser": true,
+        'node': true
+    },
+    "parser": "babel-eslint",
+    "parserOptions":{
+        "sourceType": 'module'
     },
     "extends": "eslint:recommended",
+    "plugins": ['html'],
     "rules": {
-        "key-spacing": [2, {                      // enforce spacing between keys and values in object literal properties
+        "key-spacing": [2, {                // enforce spacing between keys and values in object literal properties
             "beforeColon": false,
             "afterColon": true
         }],
